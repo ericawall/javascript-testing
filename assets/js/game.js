@@ -10,12 +10,8 @@
  */
 let mainLoginScreen = document.getElementById("login-screen");
 let getInstructions = document.getElementById("instructions-icon");
-let displayGuessNumber = document.getElementById("guesses");
 let errorMessage = document.getElementById("error-message");
-let chooseLevelScreen = document.getElementById("choose-level-screen");
 let gameScreen = document.getElementById("game-screen");
-let correctScreen = document.getElementById("correct-screen");
-let wrongScreen = document.getElementById("wrong-screen");
 
 /**
 * Show the main screen with user log-in and instruction icon
@@ -25,10 +21,7 @@ function runMainScreen() {
     mainLoginScreen.style.display = "block";
     chooseLevelScreen.style.display = "none";
     gameScreen.style.display = "none";
-    correctScreen.style.display = "none";
-    wrongScreen.style.display = "none";
     document.getElementById("user-icon").style.display = "none";
-    document.getElementById("cloud-icon").style.display = "none";
     document.getElementById("username").innerText = "";
     document.getElementById("user").focus(); //focus on input element with cursor ready for username input
 }
@@ -72,7 +65,7 @@ function checkUsername() {
 checkUsername();
 
 /**
- * Input of username using by pressing enter key
+ * Input of username by pressing enter key
  */
 document.getElementById("user").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -80,20 +73,22 @@ document.getElementById("user").addEventListener("keydown", function (event) {
     }
 });
 
+
+/** Load tetris screen, set height, width and where pieces start from */
+
 /**
  * Data displayed on the game screen
- */
+ 
 let images;
 let phrase = "";
 let highScore = 0;
+let gameLevel = 0;
 let score = 0;
-let guessesLeft = 0;
-// Create a keyboard on game screen and verify whether the phrase contains one of the below letters
-let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 
 /**
  * Display a screen with game levels and based on user's selection display relevant game settings
- */
+
 function selectGameLevel() {
     score = 0;
     document.getElementById('level-buttons').addEventListener('click', function (event) {
@@ -112,6 +107,7 @@ selectGameLevel();
  * Populate underscores for hidden phrase and keyboard buttons.
  * @param {string} gameLevel 
  */
+/**
 function setGame(gameLevel) {
     document.getElementById("difficulty-level").innerHTML = `${gameLevel}`;
     document.getElementById("cloud-icon").style.display = "inline-block";
@@ -128,14 +124,12 @@ function setGame(gameLevel) {
     setGuessingPhrase(phrase);
     showKeyboard();
 }
-
-/**
  * Display the game image from game-data file based on selected game level.
  * First displayed image is the last within the image array
  * Guesses in each round are based on the length of image array, varied for different game level.
  * 
  * @param {string} gameLevel 
- */
+
 function displaySunImages(gameLevel) {
     images = gameSetup.showImages(gameLevel);
     document.getElementById("sun-image").src = images[images.length - 1];
@@ -143,20 +137,19 @@ function displaySunImages(gameLevel) {
     displayGuessNumber.innerHTML = guessesLeft;
 }
 
-/**
  * Display underscores for hidden phrase
  * @param {string} phrase 
- */
+ 
 function setGuessingPhrase(phrase) {
     let guessingPhrase = showHiddenPhrase(phrase);
     document.getElementById("phrase").innerHTML = guessingPhrase;
 }
 
-/**
+
  * Set up underscores for every letter within the hidden phrase leaving blank spaces between words.
  * @param {string} phrase 
  * @returns {string} undescores
- */
+ 
 function showHiddenPhrase(phrase) {
     let underscores = "";
     for (let letter of phrase) {
@@ -171,7 +164,7 @@ function showHiddenPhrase(phrase) {
 
 /**
  * Populate keyboard buttons in the game screen
- */
+ 
 function showKeyboard() {
     let keyboard = "";
     for (let letter of alphabet) {
@@ -184,7 +177,7 @@ function showKeyboard() {
 /**
  * Add event listeners to populated keyboard button to enable letter guessing with use of mouse and keyboard
  * Call checkLetter function to verify if the hidden phrase contains guessed letter
- */
+
 function keyboardEventListeners() {
     document.getElementById("keyboard").addEventListener('click', function (event) {
         if (!event.target.className.includes("btn")) return;
@@ -217,7 +210,7 @@ function keyboardEventListeners() {
  * If all guesses were used then the last image in the array (index 0) is displayed and noGuessesLeft function called with a delay.
  * 
  * @param {string} letter 
- */
+
 function checkLetter(letter) {
     if (phrase.includes(letter.toLowerCase()) || phrase.includes(letter)) {
         addLetter(letter);
@@ -238,7 +231,7 @@ function checkLetter(letter) {
 /**
  * Display the sun image from the image array with the index of remaining guesses
  * @param {number} nextImageIndex 
- */
+
 function displayNextSunImage(nextImageIndex) {
     document.getElementById("sun-image").src = images[nextImageIndex];
 }
@@ -247,7 +240,7 @@ function displayNextSunImage(nextImageIndex) {
  * Replace the underscores with the guessed letter.
  * Call ifPhraseIsGuessed function.
  * @param {string} guessedLetter
- */
+ 
 
 function addLetter(guessedLetter) {
     let phraseToGuess = document.getElementById("phrase").innerHTML;
@@ -261,7 +254,7 @@ function addLetter(guessedLetter) {
 /**
  * If all letters have been guessed from the phrase, the phraseGuessed function is called. Else, return.
  * @param {string} currentPhrase 
- */
+
 function ifPhraseIsGuessed(currentPhrase) {
     if (currentPhrase === phrase) {
         phraseGuessed();
@@ -274,7 +267,7 @@ function ifPhraseIsGuessed(currentPhrase) {
  * If the phrase has been guessed, the score is updated with the number of remaining guesses in the round.
  * High score is updated if the score is higher than high score.
  * The showCorrectScreen function is called.
- */
+
 function phraseGuessed() {
     score += guessesLeft;
     if (score >= highScore) {
@@ -287,7 +280,7 @@ function phraseGuessed() {
  * Display screen when the phrase has been guessed.
  * Show score for the current round, highscore and total user score for the game.
  * Display button to continue the game when clicked.
- */
+ 
 function showCorrectScreen() {
     correctScreen.style.display = "block";
     gameScreen.style.display = "none";
@@ -313,7 +306,7 @@ function showCorrectScreen() {
  * Display screen when the game is over and the are no more guesses remaining.
  * Show the phrase which has not been guessed, score and highscore.
  * Display two buttons with EventListener for user to try again with same game level or restart the game and select other game level.
- */
+ 
 function noGuessesLeft() {
     gameScreen.style.display = "none";
     wrongScreen.style.display = "block";
@@ -333,4 +326,4 @@ function noGuessesLeft() {
         wrongScreen.style.display = "none";
         chooseLevelScreen.style.display = "block";
     });
-}
+}*/
