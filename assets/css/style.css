@@ -218,6 +218,10 @@ label {
     display: inline-block;
 }
 
+#tetris {
+    border: solid 0.2em white;
+    background-color: black;
+  }
 #difficulty-level {
     text-align: center;
     display: inline;
