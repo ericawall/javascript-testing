@@ -5,46 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sunshine Guessing Game is a friendly alternative to Hangman type game. The goal is to correctly guess words and phrases and not let the clouds cover the shining sun.">
-    <meta name="keywords" content="Guessing Game, Hangman, guessing, game, phrases, words">
+    <meta name="keywords" content="Tetris Game, tetris, falling blocks, game, retro game, gaming">
     <meta name="author" content="Erica Wall">
     
     <!-- Bootstrap v5.1.3 link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css"/>
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon_io/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon_io/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon_io/favicon-16x16.png"/>
-    <link rel="manifest" href="assets/images/favicon_io/site.webmanifest"/>
-    
+        
     <title>Tetris Game</title>
 </head>
+
 <body>
-
     <div id="game-container" class="border-2 rounded bg-light">
-        <!-- top line of game container with icons, username, level of game currently played -->
+        <!-- top line of game container with instruction icon & username -->
         <div class="top-line">         
-            <!-- Icon for username-->
-            <i class="far fa-user-circle user-icon" id="user-icon" aria-hidden="true"></i>
-            <p id="username"></p>
-            <!-- Icon for difficulty level-->
-            <div id="difficulty-level"></div>
-
-              <span class="fa-stack fa-lg cloud-icon" id="cloud-icon" aria-hidden="true">
-                <i class="fas fa-cloud fa-stack-2x"></i>
-                <span class="fa fa-stack-1x" id="guesses"></span>
-              </span>
-            <!-- Icon for game instructions -->            
-            <i class="far fa-question-circle" id="instructions-icon" aria-label="Open game instructions icon"></i>
+            <span class="far fa-user-circle user-icon" id="user-icon" aria-hidden="true"></span>
+                <p id="username"></p>
+            <span class="far fa-question-circle" id="instructions-icon" aria-label="Open game instructions icon"></span>
         </div>
 
         <!-- Main screen with game title and user login -->
         <div class="mt-3" id="login-screen">
-            
-            
+            <br>          
             <h1 id="game-title" class="pb-3">TETRIS</h1>
-            
+            <br>
             <div class="user-input">
                 <label for="user">Please enter your name</label>
                 <br>
@@ -71,87 +56,18 @@
                 <p>
                     <i class="fas fa-long-arrow-alt-left"></i> Moves the piece 1 space to the left each time it is pressed<br>
                     <i class="fas fa-long-arrow-alt-right"></i> Moves the piece 1 space to the right each time it is pressed<br>
-                    <i class="fas fa-long-arrow-alt-up"></i> Rotates the piece one time each time it is pressed<br>
+                    <i class="fas fa-long-arrow-alt-up"></i> Rotates the piece anti-clockwise by 90 degrees each time it is pressed<br>
                     <i class="fas fa-long-arrow-alt-down"></i> Makes the piece move downwards by 1 space each time it is pressed</i>
                 </p>  
                     <button class="button" onclick="closeInstructions()">Close</button>
             </div>
         </div>
 
-        <!-- Screen with selection of different game level 
-        <div id="choose-level-screen">
-            <h3>Choose difficulty level</h3>
-            <div id="level-buttons">
-                 Buttons to select game level 
-                <button data-type="easy" class="button button-level mb-4" type="button">Easy</button>
-                <button data-type="medium" class="button button-level mb-4" type="button">Medium</button>
-                <button data-type="hard" class="button button-level mb-4" type="button">Hard</button>
-            </div>
-        </div>-->
-
-               <!-- Main game screen with relevant sun and cloud pictures, guessing phrase, letter buttons and scoring  
-        <div id="game-screen">
-        <div id="category"></div>
-            <div>
-                <img id="sun-image" src="assets/images/sun-image-easy7.png" alt="Picture of the sun with cloud added on incorrect guess">
-            </div>
-            <div id="phrase"></div>
-            <div id="keyboard"></div>
-            
-            <div class="scoring-display">
-                <p>high score: <span id="high-score">0</span>
-                    <br>
-                    your score: <span id="score">0</span>
-                </p>
-            </div>
+        <div>
+           
         </div>
-
-        Screen displayed when user guesses the hidden phrase. Shows number of points gained in a round 
-        <div id="correct-screen">
-            <div class="result-text">
-                <p>Brilliant, well done!<br>
-                You got <span id="current-round-score">0</span> point<span id="plural">s</span> in this round.</p>
-            </div>
-            <div class="image-result">
-                <img src="assets/images/correct-answer-full-sun.png" alt="A picture of happy sun with sunglasses">
-            </div>        
-            <div>
-                <button id="next-phrase" class="button">Next</button>
-            </div>
-            <div class="scoring-display">
-                <p>high score: <span id="correct-high-score">0</span>
-                    <br>
-                    your score: <span id="correct-score">0</span>
-                </p>
-            </div>
-        </div>
-
-         Screen displayed when user does not guess the hidden phrase. Shows what the correct answer was 
-        <div id="wrong-screen">
-            <div class="result-text">
-                <p>Oh no, you lost.
-                    <br>
-                    The correct answer was: 
-                    <br> 
-                    <span id="correct-answer"></span>
-                </p>
-            </div>
-            <div class="image-result">
-                <img src="assets/images/game-lost-cloud-rainy.png" alt="A picture of a sad and rainy cloud">
-            </div>        
-            <div>
-                Options to restart the game on same level or choose a different game levl 
-                <button id="try-again" class="button">Try again</button>
-                <button id="restart-game" class="button">Restart the game</button>
-            </div>
-            <div class="scoring-display">
-                <p>high score: <span id="wrong-high-score">0</span>
-                    <br>
-                    your score: <span id="wrong-score">0</span>
-                </p>
-            </div>
-        </div>-->
-    </div>
+       
+    </div>          
 
     <footer>
         <div class="float-start">

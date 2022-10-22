@@ -82,12 +82,16 @@ h3 {
 .user-icon {
     font-size: 250%; 
     float: left;
+   
 }
 
 /* username display */
 .top-line p {
     float: left;
+  
 }
+
+
 
 /* Style instructions icon and remove default background color */
 #instructions-icon {
@@ -110,6 +114,7 @@ h3 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Press Start 2P', cursive;
+    
 
     animation: fadeInAnimation ease 5s;
     animation-iteration-count: 1;
