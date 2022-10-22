@@ -265,6 +265,8 @@ function arenaSweep() {
  }
  
  function resetGame() {
+    gameScreen.style.display = "block";
+    wrongScreen.style.display = "none";
      arena.forEach(row => row.fill(0));
      player.score = 0;
      player.level = 0;
@@ -288,35 +290,35 @@ function arenaSweep() {
      }
  }
  
- let dropCounter = 0;
- let dropInterval = 1000;
- let levelSize = 1000;
- let levelSpeedIncrease = 10;
+let dropCounter = 0;
+let dropInterval = 1000;
+let levelSize = 1000;
+let levelSpeedIncrease = 10;
  
- let lastTime = 0;
+let lastTime = 0;
  
- function update(time = 0) {
-     const deltaTime = time - lastTime;
+function update(time = 0) {
+    const deltaTime = time - lastTime;
  
-     dropCounter += deltaTime;
-     if (dropCounter > dropInterval) {
+    dropCounter += deltaTime;
+    if (dropCounter > dropInterval) {
          playerDrop();
-     }
+    }
  
-     lastTime = time;
+    lastTime = time;
  
-     draw();
-     requestAnimationFrame(update);
- }
- 
- function updateScore() {
-     if( player.score - levelSize * player.level >= levelSize ) {
-         player.level++;
-         dropInterval -= levelSpeedIncrease;
-     }
-     document.getElementById('score').innerText = 'Score: ' + player.score;
-     document.getElementById('level').innerText = 'Level: ' + player.level;
- }
+    draw();
+    requestAnimationFrame(update);
+} 
+// update the players score, eventually update level increase 
+function updateScore() {
+    if( player.score - levelSize * player.level >= levelSize ) {
+        player.level++;
+        dropInterval -= levelSpeedIncrease;
+    }
+    document.getElementById('score').innerText = 'Score: ' + player.score;
+    document.getElementById('level').innerText = 'Level: ' + player.level;
+}
  
  document.addEventListener('keydown', event => {
      if (event.keyCode === 37) {
@@ -361,12 +363,9 @@ function arenaSweep() {
  * Display screen when the game is over.
  * Display button with EventListener for user to try again.
  */
- function gameOver() {
+function gameOver() {
     gameScreen.style.display = "none";
     wrongScreen.style.display = "block";
 
-    document.getElementById("user-log").addEventListener("click", resetGame());
-} 
-
-
-
+    document.getElementById("try-again").addEventListener("click", resetGame);
+    }
