@@ -43,34 +43,50 @@
             </p>
         </div>
 
-        <!-- Modal with game instructions -->
+        <!-- Modal with game controls instructions -->
         <div id="myModal" class="modal border border-2 p-1 p-sm-1">
             <div class="modal-content">
                 <h2 id="modal-header">Rules</h2>
                 <p>Complete lines by moving differently the shaped piecesthat descend onto the playing field.<br> 
-                    Completed lines will disappeareach completed line generates 1 point.<br> 
-                    The game ends when the uncleared lines reach the top of the playing field.<br> 
+                   Completed lines will disappeareach completed line generates 1 point.<br> 
+                   The game ends when the uncleared lines reach the top of the playing field.<br> 
                 </p>
                 <h2 id="modal-header">How to play:</h2>
                 <p>Use the arrow keys as follows:</p>
                 <p>
-                    <i class="fas fa-long-arrow-alt-left"></i> Moves the piece 1 space to the left each time it is pressed<br>
-                    <i class="fas fa-long-arrow-alt-right"></i> Moves the piece 1 space to the right each time it is pressed<br>
-                    <i class="fas fa-long-arrow-alt-up"></i> Rotates the piece anti-clockwise by 90 degrees each time it is pressed<br>
-                    <i class="fas fa-long-arrow-alt-down"></i> Makes the piece move downwards by 1 space each time it is pressed</i>
+                   <i class="fas fa-long-arrow-alt-left"></i> Moves the piece 1 space to the left each time it is pressed<br>
+                   <i class="fas fa-long-arrow-alt-right"></i> Moves the piece 1 space to the right each time it is pressed<br>
+                   <i class="fas fa-long-arrow-alt-up"></i> Rotates the piece anti-clockwise by 90 degrees each time it is pressed<br>
+                   <i class="fas fa-long-arrow-alt-down"></i> Makes the piece move downwards by 1 space each time it is pressed</i>
                 </p>  
-                    <button class="button" onclick="closeInstructions()">Close</button>
+                   <button class="button" onclick="closeInstructions()">Close</button>
             </div>
         </div>
 
         <div id="game-screen">
             <div>
-                <span id="score">Score 0</span>
-                <span id="level">Level 0</span>
+                <span id="score">0</span>
+                <span id="level">0</span>
             </div>
+            <!-- section where tetris game is-->        
             <canvas id="tetris" width="240" height="400">
         </div>
-    </div>          
+
+        <!-- Screen displayed when user does not guess the hidden phrase. Shows what the correct answer was -->
+        <div id="wrong-screen">
+            <div class="result-text">
+                <h1 id="game-title" class="pb-3">GAME OVER!</h1>
+                <h1 id="game-title" class="pb-3">GAME OVER!</h1>
+                <h1 id="game-title" class="pb-3">GAME OVER!</h1>
+            </div>
+            <br>      
+            <div>
+                <!-- Options to play the game again -->
+                <button id="try-again" class="button">Try again</button>
+            </div>
+        </div>
+    </div>
+      
 
     <footer>
         <div class="float-start">

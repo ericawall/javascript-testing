@@ -12,7 +12,6 @@ let mainLoginScreen = document.getElementById("login-screen");
 let getInstructions = document.getElementById("instructions-icon");
 let errorMessage = document.getElementById("error-message");
 let gameScreen = document.getElementById("game-screen");
-let correctScreen = document.getElementById("correct-screen");
 let wrongScreen = document.getElementById("wrong-screen");
 
 
@@ -23,6 +22,7 @@ function runMainScreen() {
     errorMessage.style.display = "none";
     mainLoginScreen.style.display = "block";
     gameScreen.style.display = "none";
+    wrongScreen.style.display = "none";
     document.getElementById("user-icon").style.display = "none";
     document.getElementById("username").innerText = "";
     document.getElementById("user").focus(); //focus on input element with cursor ready for username input
@@ -56,6 +56,7 @@ function checkUsername() {
     if (username.length >= 1 && username.length <= 12) {
         gameScreen.style.display = "block";
         mainLoginScreen.style.display = "none";
+        wrongScreen.style.display = "none";
         document.getElementById("user-icon").style.display = "block";
         document.getElementById("username").innerText = username;
     } else {
@@ -77,31 +78,33 @@ document.getElementById("user").addEventListener("keydown", function (event) {
 
 /**
  * Data displayed on the game screen
- */
- // Create the canvas
- const canvas = document.getElementById('tetris');
- const context = canvas.getContext('2d');
+*/
+// Create the canvas
+const canvas = document.getElementById('tetris');
+const context = canvas.getContext('2d');
  
- context.scale(20, 20);
+context.scale(20, 20);
+
+/* Check if the row of blocks is full */
+function arenaSweep() {
+    let rowCount = 1;
+        outer: for (let y = arena.length -1; y > 0; --y) {
+            for (let x = 0; x < arena[y].length; ++x) {
+                if (arena[y][x] === 0) {
+                continue outer;
+            }
+        }
  
- function arenaSweep() {
-     let rowCount = 1;
-     outer: for (let y = arena.length -1; y > 0; --y) {
-         for (let x = 0; x < arena[y].length; ++x) {
-             if (arena[y][x] === 0) {
-                 continue outer;
-             }
-         }
+        const row = arena.splice(y, 1)[0].fill(0);
+             arena.unshift(row);
+             ++y;
  
-         const row = arena.splice(y, 1)[0].fill(0);
-         arena.unshift(row);
-         ++y;
- 
-         player.score += rowCount * 10;
-         rowCount *= 2;
-     }
- }
- 
+             player.score += rowCount * 10;
+             rowCount *= 2;
+        }
+}
+
+/* check if there is a collision between the arena and player */
  function collide(arena, player) {
      const m = player.matrix;
      const o = player.pos;
@@ -117,7 +120,7 @@ document.getElementById("user").addEventListener("keydown", function (event) {
      return false;
  }
  
- 
+/* Create the black board to play within */ 
  function createMatrix(w, h) {
      const matrix = [];
      while (h--) {
@@ -125,7 +128,8 @@ document.getElementById("user").addEventListener("keydown", function (event) {
      }
      return matrix;
  }
- 
+
+ /* Create the individual tetris pieces (tetrominos) */
  function createPiece(type)
  {
      if (type === 'I') {
@@ -321,7 +325,8 @@ document.getElementById("user").addEventListener("keydown", function (event) {
          playerRotate(1);
      }
  });
- 
+
+ /* Colours for each tetromino */
  const colors = [
      null,
      'purple',
@@ -345,3 +350,29 @@ document.getElementById("user").addEventListener("keydown", function (event) {
  playerReset();
  updateScore();
  update(); 
+
+/**
+ * Display screen when the game is over and the are no more guesses remaining.
+ * Show the phrase which has not been guessed, score and highscore.
+ * Display two buttons with EventListener for user to try again with same game level or restart the game and select other game level.
+ */
+ function noGuessesLeft() {
+    gameScreen.style.display = "none";
+    wrongScreen.style.display = "block";
+    document.getElementById("wrong-score").innerHTML = score;
+    document.getElementById("wrong-high-score").innerHTML = highScore;
+    document.getElementById('correct-answer').innerHTML = phrase;
+
+    document.getElementById("try-again").addEventListener("click", function () {
+        score = 0;
+        wrongScreen.style.display = "none";
+        let sameLevel = document.getElementById("difficulty-level").innerHTML;
+        setGame(sameLevel);
+    });
+
+    document.getElementById("restart-game").addEventListener("click", function () {
+        score = 0;
+        wrongScreen.style.display = "none";
+        gameScreen.style.display = "block";
+    });
+} 
