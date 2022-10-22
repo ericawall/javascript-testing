@@ -79,13 +79,13 @@ document.getElementById("user").addEventListener("keydown", function (event) {
 /**
  * Data displayed on the game screen
 */
-// Create the canvas
+// Create the canvas variable
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
  
 context.scale(20, 20);
 
-/* Check if the row of blocks is full */
+// Check if the row of blocks is full 
 function arenaSweep() {
     let rowCount = 1;
         outer: for (let y = arena.length -1; y > 0; --y) {
@@ -177,6 +177,7 @@ function arenaSweep() {
      }
  }
  
+ // to position where the piece will be initially placed
  function drawMatrix(matrix, offset) {
      matrix.forEach((row, y) => {
          row.forEach((value, x) => {
@@ -190,6 +191,7 @@ function arenaSweep() {
      });
  };
  
+// style the tetris canvas
  function draw() {
      context.fillStyle = '#000';
      context.fillRect(0, 0, canvas.width, canvas.height);
@@ -198,6 +200,7 @@ function arenaSweep() {
      drawMatrix(player.matrix, player.pos);
  }
  
+ //
  function merge(arena, player) {
      player.matrix.forEach((row, y) => {
          row.forEach((value, x) => {
@@ -207,7 +210,8 @@ function arenaSweep() {
          });
      });
  }
- 
+
+ // rotating the tetrominos
  function rotate(matrix, dir) {
      for (let y = 0; y < matrix.length; ++y) {
          for (let x = 0; x < y; ++x) {
@@ -255,7 +259,8 @@ function arenaSweep() {
      player.pos.x = (arena[0].length / 2 | 0) -
                     (player.matrix[0].length / 2 | 0);
      if (collide(arena, player)) {
-         resetGame();
+        gameOver(); 
+        
      }
  }
  
@@ -266,7 +271,8 @@ function arenaSweep() {
      dropInterval = 1000;
      updateScore();
  }
- 
+
+
  function playerRotate(dir) {
      const pos = player.pos.x;
      let offset = 1;
@@ -352,27 +358,15 @@ function arenaSweep() {
  update(); 
 
 /**
- * Display screen when the game is over and the are no more guesses remaining.
- * Show the phrase which has not been guessed, score and highscore.
- * Display two buttons with EventListener for user to try again with same game level or restart the game and select other game level.
+ * Display screen when the game is over.
+ * Display button with EventListener for user to try again.
  */
- function noGuessesLeft() {
+ function gameOver() {
     gameScreen.style.display = "none";
     wrongScreen.style.display = "block";
-    document.getElementById("wrong-score").innerHTML = score;
-    document.getElementById("wrong-high-score").innerHTML = highScore;
-    document.getElementById('correct-answer').innerHTML = phrase;
 
-    document.getElementById("try-again").addEventListener("click", function () {
-        score = 0;
-        wrongScreen.style.display = "none";
-        let sameLevel = document.getElementById("difficulty-level").innerHTML;
-        setGame(sameLevel);
-    });
-
-    document.getElementById("restart-game").addEventListener("click", function () {
-        score = 0;
-        wrongScreen.style.display = "none";
-        gameScreen.style.display = "block";
-    });
+    document.getElementById("user-log").addEventListener("click", resetGame());
 } 
+
+
+
