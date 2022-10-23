@@ -11,7 +11,6 @@
     --light-orange: #FCCD4D;
     --orange: #F8B500;
     --gray:#445361;
-
 }
 
 /* Highlighting of text */
@@ -19,7 +18,7 @@
     background-color: var(--light-orange);
   }
 
-  /* Remove default values */
+/* Remove default values */
 * {
     margin: 0;
     padding: 0;
@@ -28,9 +27,9 @@
 }
 
 body {
-  font-family: "Noto Sans", sans-serif;
-  color: #445361;
-  font-weight: 400;
+    font-family: "Noto Sans", sans-serif;
+    color: #445361;
+    font-weight: 400;
 }
 
 /* Set up transparency of background image */
@@ -39,7 +38,7 @@ body::before {
     content: "";
     width: 100vw;
     height: 100vh;
-    background: url(../images/tetris_wallpaper_by_morgu3muzic_det9p63-pre.jpg);
+    background: url(../images/tetris.png);
     background-color: var(--sky);
     background-repeat: repeat;
     background-size: cover;
@@ -88,10 +87,7 @@ h3 {
 /* username display */
 .top-line p {
     float: left;
-  
 }
-
-
 
 /* Style instructions icon and remove default background color */
 #instructions-icon {
@@ -100,7 +96,7 @@ h3 {
     float: right;
 }
 
-#login-screen, #phrase, .result-text {
+#login-screen {
     text-transform: uppercase;
 }
 
@@ -115,7 +111,6 @@ h3 {
     -webkit-text-fill-color: transparent;
     font-family: 'Press Start 2P', cursive;
     
-
     animation: fadeInAnimation ease 5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -202,14 +197,10 @@ label {
     height: 100%;
 }
 
-/* Buttons to select game level */
-.button-level {
-    width: 60%;
-}
 
 /* Game screen */
 /* Display of username, selected game level and remaining guesses in top line */
-#username, #difficulty-level {
+#username {
     font-size: 100%;
     font-weight: bold;
     text-transform: none;
@@ -222,66 +213,34 @@ label {
     border: solid 0.2em white;
     background-color: black;
   }
-#difficulty-level {
-    text-align: center;
-    display: inline;
-}
-
-#cloud-icon {
-    color: var(--sky);
-    font-size: inherit;
-    font-weight: bold;
-    font-size: 130%;
-    display: inline-block;
-    vertical-align: top;
-    display:none;
-}
-
-#guesses {
-    color: var(--navy-blue);
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.2rem;
-}
-
-#category {
-    margin-bottom: 0.5rem;
-}
-
-#sun-image {
-    width: 35%;
-}
-
-#phrase {
-    letter-spacing: 0.4rem;
-    font-weight: bold;
-    padding: 2%;
-    font-size: 1.2rem;
-}
 
 #game-screen p {
     font-weight: 400;
     display: inline;
 }
 
-/* Styling of screens */
-.image-result img {
-    width: 17%;
+#wrong-screen img {
+    width: 30%;
+    height: 30%;
 }
 
-#current-round-score {
-    color: var(--pink);
+#image-other-screens img {
+    width: 25%;
+    height: 25%;
+}
+
+/* Styling of screens */
+#result-text img {
+    width: 17%;
+    height: 30%;
 }
 
 /* Change style of span with letter 's' for score over 1 point */
-#plural {
-    font-size: inherit;
-}
-
 .scoring-display {
     margin-top: 3%;
 }
 
-#next-phrase, #try-again, #restart-game {
+#try-again, #restart-game {
     width: 50%;
     margin-top: 1rem;
 }
@@ -300,7 +259,8 @@ footer p {
     padding-top: 5%;
     margin-bottom: 0;
     font-size: 110%;
-    color: white;
+    font-weight: bolder;
+    color: var(--navy-blue);
 }
 
 footer a {
@@ -333,7 +293,7 @@ a:hover {
     padding: 1rem 0;
 }
 
-/* Media querry adjustments for different screen sizes */
+/* Media query adjustments for different screen sizes */
 
 @media all and (max-width: 768px) {
     #user-log {

@@ -77,15 +77,16 @@ document.getElementById("user").addEventListener("keydown", function (event) {
 });
 
 /**
- * Data displayed on the game screen
+ * Data displayed on the game screen.
 */
-// Create the canvas variable
+
+// Create the canvas.
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
- 
+// Scale the canvas. 
 context.scale(20, 20);
 
-// Check if the row of blocks is full 
+// If a player has filled a row we want to remove it and give them a score 
 function arenaSweep() {
     let rowCount = 1;
         outer: for (let y = arena.length -1; y > 0; --y) {
@@ -104,192 +105,182 @@ function arenaSweep() {
         }
 }
 
-/* check if there is a collision between the arena and player */
- function collide(arena, player) {
-     const m = player.matrix;
-     const o = player.pos;
-     for (let y = 0; y < m.length; ++y) {
-         for (let x = 0; x < m[y].length; ++x) {
-             if (m[y][x] !== 0 &&
+// Create the collision function.
+function collide(arena, player) {
+    const m = player.matrix;
+    const o = player.pos;
+    for (let y = 0; y < m.length; ++y) {
+        for (let x = 0; x < m[y].length; ++x) {
+            if (m[y][x] !== 0 &&
                 (arena[y + o.y] &&
-                 arena[y + o.y][x + o.x]) !== 0) {
-                 return true;
-             }
-         }
-     }
-     return false;
- }
+                arena[y + o.y][x + o.x]) !== 0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
  
-/* Create the black board to play within */ 
- function createMatrix(w, h) {
-     const matrix = [];
-     while (h--) {
-         matrix.push(new Array(w).fill(0));
-     }
-     return matrix;
- }
+// Create the arena to play within.  
+function createMatrix(w, h) {
+    const matrix = [];
+    while (h--) {
+        matrix.push(new Array(w).fill(0));
+    }
+    return matrix;
+}
 
- /* Create the individual tetris pieces (tetrominos) */
- function createPiece(type)
- {
-     if (type === 'I') {
-         return [
-             [0, 1, 0, 0],
-             [0, 1, 0, 0],
-             [0, 1, 0, 0],
-             [0, 1, 0, 0],
-         ];
-     } else if (type === 'L') {
-         return [
-             [0, 2, 0],
-             [0, 2, 0],
-             [0, 2, 2],
-         ];
-     } else if (type === 'J') {
-         return [
-             [0, 3, 0],
-             [0, 3, 0],
-             [3, 3, 0],
-         ];
-     } else if (type === 'O') {
-         return [
-             [4, 4],
-             [4, 4],
-         ];
-     } else if (type === 'Z') {
-         return [
-             [5, 5, 0],
-             [0, 5, 5],
-             [0, 0, 0],
-         ];
-     } else if (type === 'S') {
-         return [
-             [0, 6, 6],
-             [6, 6, 0],
-             [0, 0, 0],
-         ];
-     } else if (type === 'T') {
-         return [
-             [0, 7, 0],
-             [7, 7, 7],
-             [0, 0, 0],
-         ];
-     }
- }
+//Create the tetromino shapes.
+function createPiece(type) {
+    if (type === 'I') {
+        return [
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+        ];
+    } else if (type === 'L') {
+        return [
+            [0, 2, 0],
+            [0, 2, 0],
+            [0, 2, 2],
+        ];
+    } else if (type === 'J') {
+        return [
+            [0, 3, 0],
+            [0, 3, 0],
+            [3, 3, 0],
+        ];
+    } else if (type === 'O') {
+        return [
+            [4, 4],
+            [4, 4],
+        ];
+    } else if (type === 'Z') {
+        return [
+            [5, 5, 0],
+            [0, 5, 5],
+            [0, 0, 0],
+        ];
+    } else if (type === 'S') {
+        return [
+            [0, 6, 6],
+            [6, 6, 0],
+            [0, 0, 0],
+        ];
+    } else if (type === 'T') {
+        return [
+            [0, 7, 0],
+            [7, 7, 7],
+            [0, 0, 0],
+        ];
+    }
+}
  
- // to position where the piece will be initially placed
- function drawMatrix(matrix, offset) {
-     matrix.forEach((row, y) => {
-         row.forEach((value, x) => {
-             if (value !== 0) {
-                 context.fillStyle = colors[value];
-                 context.fillRect(x + offset.x,
-                                  y + offset.y,
-                                  1, 1);
-             }
-         });
-     });
- };
+// position where the piece will be initially placed.
+function drawMatrix(matrix, offset) {
+    matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value !== 0) {
+                context.fillStyle = colors[value];
+                context.fillRect(x + offset.x,
+                                y + offset.y,
+                                1, 1);
+            }
+        });
+    });
+};
  
 // style the tetris canvas
- function draw() {
-     context.fillStyle = '#000';
-     context.fillRect(0, 0, canvas.width, canvas.height);
+function draw() {
+    context.fillStyle = '#000000';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+     
+    drawMatrix(arena, {x: 0, y: 0});
+    drawMatrix(player.matrix, player.pos);
+}
  
-     drawMatrix(arena, {x: 0, y: 0});
-     drawMatrix(player.matrix, player.pos);
- }
- 
- //
- function merge(arena, player) {
-     player.matrix.forEach((row, y) => {
-         row.forEach((value, x) => {
-             if (value !== 0) {
-                 arena[y + player.pos.y][x + player.pos.x] = value;
-             }
-         });
-     });
- }
+//
+function merge(arena, player) {
+    player.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value !== 0) {
+                arena[y + player.pos.y][x + player.pos.x] = value;
+            }
+        });
+    });
+}
 
- // rotating the tetrominos
- function rotate(matrix, dir) {
-     for (let y = 0; y < matrix.length; ++y) {
-         for (let x = 0; x < y; ++x) {
-             [
-                 matrix[x][y],
-                 matrix[y][x],
-             ] = [
-                 matrix[y][x],
-                 matrix[x][y],
-             ];
-         }
-     }
+// Rotating the tetrominos.
+function rotate(matrix, dir) {
+    for (let y = 0; y < matrix.length; ++y) {
+        for (let x = 0; x < y; ++x) {
+            [   matrix[x][y],
+                matrix[y][x],
+            ] = [
+                matrix[y][x],
+                matrix[x][y],
+            ];
+        }
+    }
  
-     if (dir > 0) {
-         matrix.forEach(row => row.reverse());
-     } else {
-         matrix.reverse();
-     }
- }
+    if (dir > 0) {
+        matrix.forEach(row => row.reverse());
+    } else {
+        matrix.reverse();
+    }
+}
+
+/* Dropping the tetrominos, moving the tetrominos, updating score if row is completed. */
+function playerDrop() {
+    player.pos.y++;
+    if (collide(arena, player)) {
+        player.pos.y--;
+        merge(arena, player);
+        playerReset();
+        arenaSweep();
+        updateScore();
+    }
+    dropCounter = 0;
+}
  
- function playerDrop() {
-     player.pos.y++;
-     if (collide(arena, player)) {
-         player.pos.y--;
-         merge(arena, player);
-         playerReset();
-         arenaSweep();
-         updateScore();
-     }
-     dropCounter = 0;
- }
+function playerMove(offset) {
+    player.pos.x += offset;
+    if (collide(arena, player)) {
+        player.pos.x -= offset;
+    }
+}
  
- function playerMove(offset) {
-     player.pos.x += offset;
-     if (collide(arena, player)) {
-         player.pos.x -= offset;
-     }
- }
- 
- function playerReset() {
-     player.matrix = createPiece('T');
-     const pieces = 'TJLOSZI';
-     player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
-     player.pos.y = 0;
-     player.pos.x = (arena[0].length / 2 | 0) -
-                    (player.matrix[0].length / 2 | 0);
-     if (collide(arena, player)) {
+function playerReset() {
+    player.matrix = createPiece('T');
+    const pieces = 'TJLOSZI';
+    player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
+    player.pos.y = 0;
+    player.pos.x = (arena[0].length / 2 | 0) -
+                   (player.matrix[0].length / 2 | 0);
+    if (collide(arena, player)) {
         gameOver(); 
         
-     }
- }
- 
- function resetGame() {
-    gameScreen.style.display = "block";
-    wrongScreen.style.display = "none";
-     arena.forEach(row => row.fill(0));
-     player.score = 0;
-     player.level = 0;
-     dropInterval = 1000;
-     updateScore();
- }
+    }
+}
 
+// Rotating a piece.
+function playerRotate(dir) {
+    const pos = player.pos.x;
+    let offset = 1;
+    rotate(player.matrix, dir);
+    while (collide(arena, player)) {
+        player.pos.x += offset;
+        offset = -(offset + (offset > 0 ? 1 : -1));
+        if (offset > player.matrix[0].length) {
+            rotate(player.matrix, -dir);
+            player.pos.x = pos;
+            return;
+        }
+    }
+}
 
- function playerRotate(dir) {
-     const pos = player.pos.x;
-     let offset = 1;
-     rotate(player.matrix, dir);
-     while (collide(arena, player)) {
-         player.pos.x += offset;
-         offset = -(offset + (offset > 0 ? 1 : -1));
-         if (offset > player.matrix[0].length) {
-             rotate(player.matrix, -dir);
-             player.pos.x = pos;
-             return;
-         }
-     }
- }
- 
+/* Updating the level by score & updating speed of game by time. */
 let dropCounter = 0;
 let dropInterval = 1000;
 let levelSize = 1000;
@@ -310,7 +301,8 @@ function update(time = 0) {
     draw();
     requestAnimationFrame(update);
 } 
-// update the players score, eventually update level increase 
+
+// update the players score, update level increase. 
 function updateScore() {
     if( player.score - levelSize * player.level >= levelSize ) {
         player.level++;
@@ -319,53 +311,70 @@ function updateScore() {
     document.getElementById('score').innerText = 'Score: ' + player.score;
     document.getElementById('level').innerText = 'Level: ' + player.level;
 }
- 
+
+// Keyboard bindings QUERTY Style. Controls the movement of tetrominos using EventListener.
  document.addEventListener('keydown', event => {
-     if (event.keyCode === 37) {
+    // Arrow Left key 
+    if (event.keyCode === 37) {
          playerMove(-1);
+    // Arrow Right Key
      } else if (event.keyCode === 39) {
          playerMove(1);
+    // Arrow Down key
      } else if (event.keyCode === 40) {
          playerDrop();
-        } else if (event.keyCode === 81) {
+    // Arrow Up key
+        } else if (event.keyCode === 38) {
          playerRotate(-1);
-     } else if (event.keyCode === 87) {
-         playerRotate(1);
-     }
- });
-
- /* Colours for each tetromino */
- const colors = [
-     null,
-     'purple',
-     'yellow',
-     'orange',
-     'blue',
-     'aqua',
-     'green',
-     'red',
- ];
+        }   
+})
+   
+// Colours for each tetromino, they are random. 
+const colors = [
+    null,
+    'purple',
+    'yellow',
+    'orange',
+    'blue',
+    'aqua',
+    'green',
+    'red',
+];
  
+// Create game arena.
  const arena = createMatrix(12, 20);
  
+// Start player score at zero.
  const player = {
      pos: {x: 0, y: 0},
      matrix: null,
      score: 0,
      level: 0,
- };
+};
  
- playerReset();
- updateScore();
- update(); 
+playerReset();
+updateScore();
+update(); // Run the update to continue to draw new pieces into play
 
 /**
- * Display screen when the game is over.
- * Display button with EventListener for user to try again.
- */
+* Display screen when the game is over.
+*/
+
+// Open the game over screen. Display button with EventListener for user to try again.
 function gameOver() {
     gameScreen.style.display = "none";
     wrongScreen.style.display = "block";
 
     document.getElementById("try-again").addEventListener("click", resetGame);
     }
+
+// To restart the game.
+function resetGame() {
+    gameScreen.style.display = "block";
+    wrongScreen.style.display = "none";
+    arena.forEach(row => row.fill(0));
+    player.score = 0;
+    player.level = 0;
+    dropInterval = 1000;
+    updateScore();
+}

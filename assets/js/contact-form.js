@@ -18,32 +18,39 @@ $(document).ready(function () {
  * Script taken from the official EmailJS tutorial https://www.emailjs.com/docs/tutorial/creating-contact-form/ 
  * and Email Templates Playground environment.
  */
-const sendFormButton = document.getElementById("btn-send-form");
 
-document.getElementById("contact-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    emailjs.init("user_ky3jHn7C0IfrC1dfTWauP");
-    sendFormButton.value = "Sending..."; //changing value of the button when sending in progress
+const btn = document.getElementById("btn-send-form");
 
-    emailjs.sendForm("sunshineguessing", "sgg-contact-form", this)
-        .then(() => {
-            sendFormButton.value = "Send";
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        btn.value = "Sending..."; //changing value of the button when sending in progress
+
+        const serviceID = 'service_ye3r4hi';
+        const templateID = 'template_o9ejjsc';
+
+        emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+            btn.value = 'Send Email';
             formSubmittedMessage();
-
-        }, (err) => {
-            console.log(JSON.stringify(err));
+            //alert('Sent!');
+            }, (err) => {
+            btn.value = 'Send Email';
+            alert(JSON.stringify(err));
         });
-});
+    });
+
 
 /**
  * Display a thank you image on the screen once the contact form has been submitted
- */
+*/ 
 function formSubmittedMessage() {
     let message = `
+            <p>Thank you, your form has been submitted.</p><br>
             <div class="image-other-screens">
-                <img src="assets/images/contact-form-thankyou-image.png" alt="Sun image with thank you writing">
-            </div>
-            <a href="index.html" class="button my-3">Go back</a>
+                <img src="assets/images/contact-form-thank-you.jpg" alt="tetris-style image with thank you writing">
+            </div><br><br>
+            <a href="index.html" class="button my-3">Return to Tetris Homepage</a>
             `;
     document.getElementById("game-container").innerHTML = message;
 }

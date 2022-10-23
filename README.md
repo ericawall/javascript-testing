@@ -1,4 +1,4 @@
-# Sunshine Guessing Game <img src="assets\images\correct-answer-full-sun.png" style="width: 40px;height:40px;">
+# Tetris <img src="" style="width: 40px;height:40px;">
 
 **Developer: Erica Wall**
 
@@ -42,7 +42,7 @@
 
 ## Project Goals
 
-The goal of this project was to create an interactive and user-friendly version of the well-known Hangman game.
+The goal of this project was to create a simple, interactive and user-friendly version of the well-known Tetris game.
 
 ### User Goals
 
@@ -60,7 +60,7 @@ The goal of this project was to create an interactive and user-friendly version 
 
 ### Target Audience
 
-- The game can be played by anyone who likes word guessing games
+- The game can be played by people of all ages and cultures
 - Anyone who wants to have fun playing a game with simple and clear rules
 
 ### User Requirements and Expectations
@@ -79,38 +79,29 @@ The goal of this project was to create an interactive and user-friendly version 
 
 1. I want to easily understand the rules of the game
 2. I want to enter my name and have it visible on screen while the game is played
-3. I want to be able to choose a difficulty level for the game
-4. I want to have different categories of phrases to guess from
-5. I want to be able to play the game both by clicking the mouse and by using the keyboard
-6. I want to be able to see which letters I have already guessed and the number of guesses I have left in the round
-7. I want to see my result after I guessed the phrase
-8. I want to see the phrase I didn’t manage to guess
-9. I want to be able to play the game on desktop, tablet and mobile devices
-10. I want to be able to get in touch with the developer
-11. I want to be sure that my message has been sent
+3. I want to be able to play the game by using the keyboard
+4. I want to be able to play the game on desktop, tablet and mobile devices
+5. I want to be able to get in touch with the developer
+6. I want to be sure that my message has been sent
 
 ### Site Owner
 
-12. I want user to easily understand the game
-13. I want the user to be able to challenge themselves
-14. I want my game to be fully responsive
-15. I want the user to come to a 404 error page instead of having to use the browser back button if they enter a url that does not exist
-16. I want user to be able to contact me and provide their feedback
+7. I want user to easily understand the game
+8. I want the user to be able to challenge themselves
+9. I want my game to be fully responsive
+10. I want the user to come to a 404 error page instead of having to use the browser back button if they enter a url that does not exist
+11. I want user to be able to contact me and provide their feedback
 
 ## Design
 
 ### Colour Scheme
 
-The colour scheme across the screens was kept simple and consistent and was inspired by the colours of the sky and sun.
-- For the contrast, the shade of the pink was used for error message and unguessed phrase
-- Game title and game navigation buttons are orange
-
-The pallet used was found on [Colormind.io](http://colormind.io/)
-<img src="docs/colour-pallet-sgg.JPG">
+The colour scheme across the screens was kept simple and consistent and was inspired by the colours of the tetris bricks (known as "Tetrominos")
+- Game title is red, game navigation buttons are orange
 
 ### Fonts
 
-Google Fonts were implemented on the website. Nunito with sans-serif fallback was used across all screens as I found it highly readable and clear. To reflect the fun aspect of the game, the Rammetto One with a cursive fallback was used for the game title and instructions heading.
+Google Fonts were implemented on the website. Noto Sans with sans-serif fallback was used across all screens as I found it highly readable and clear. To reflect the retro aspect of the game, the Press Start 2P with a cursive fallback was used for the game title and instructions heading.
 
 ### Structure
 
@@ -118,10 +109,8 @@ The structure of the website was designed to be easy to learn and navigate. Each
 
 - The game consist of the following screens:
   - A home page / start screen with instructions icon in the top line, game title and user login
-  - Choose game difficulty level screen
-  - Main game screen - it contains the category of the phrase, number of guesses remaining in the round, hidden phrase with underscores for each letter, alphabet letters to click, current score and high score
-  - Screen shown when the phrase has been guessed - the number of points gained in the round and overall scoring are displayed
-  - Screen shown when the phrase has not been guessed within specific number of guesses. The correct phrase and options to either restart the game on same level or select other game level are shown
+  - Main game screen - it contains the tetris game, current score and current level
+  - Screen shown when the game is over. The option to restart the game is shown
 - A modal with game instructions which pops up when the instructions icon is clicked, available on all game screens
 - The contact page with contact form which allows users to send an email to the developer and provide their feedback
 - A separate 404 error page
@@ -152,16 +141,13 @@ The structure of the website was designed to be easy to learn and navigate. Each
 - [Balsamiq](https://balsamiq.com/) to create the wireframes for the project
 - [Bootstrap v5.1.3](https://getbootstrap.com/)
 - [EmailJS](https://www.emailjs.com) used to send email from the contact form
-- [Favicon.io](https://favicon.io) for making the site favicon
 - [Font Awesome](https://fontawesome.com/) - Icons from Font Awesome were used throughout the site
-- Gimp and Microsoft Paint were used to create game pictures and resize background image
 - [Git](https://git-scm.com/) was used for version control within VSCode to push the code to GitHub
 - [GitHub](https://github.com/) was used as a remote repository to store project code
 - [Google Fonts](https://fonts.google.com/)
 - [Remove.bg](https://www.remove.bg/) was used to remove background on logos
-- [This source](https://chir.ag/projects/name-that-color) was used to initially name root colors from the colour pallet. I have removed unwanted colors and renamed all during the development of the project.
 - [Chrome dev tools](https://developers.google.com/web/tools/chrome-devtools) were used for debugging of the code and check site for responsiveness
-- [WC3 Validator](https://validator.w3.org/), [Jigsaw W3 Validator](https://jigsaw.w3.org/css-validator/), [JShint](https://jshint.com/), [Wave Validator](https://wave.webaim.org/), [Lighthouse](https://developers.google.com/web/tools/lighthouse/) and [Am I Responsive](http://ami.responsivedesign.is/) were all used to validate the website
+- [WC3 Validator](https://validator.w3.org/), [Jigsaw W3 Validator](https://jigsaw.w3.org/css-validator/) and [Am I Responsive](http://ami.responsivedesign.is/) were all used to validate the website
 
 ## Features
 
@@ -179,7 +165,6 @@ The website has 3 webpages consisting of 11 distinct features described below.
 #### Username input
 - User is asked to enter their name in the input field. The username needs to be between 1 and 12 characters long. The are no restrictions on characters type. However, if the input field is left blank, then a feedback message is displayed for user to try again. Once a valid username has been provided, the name is displayed next to the user icon on the next screen and user is able to select the difficulty level of the game.
 - Username remains displayed on all game screens
-- User stories covered: 2
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-username-input.JPG">
@@ -189,7 +174,6 @@ The website has 3 webpages consisting of 11 distinct features described below.
 - A modal with game instructions which pops up when the instructions icon is clicked
 - Available on all game screens
 - Background color is set slightly darker than on the game screen
-- User stories covered: 1, 12
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-instructions.JPG">
@@ -198,63 +182,27 @@ The website has 3 webpages consisting of 11 distinct features described below.
 ### Footer
 - Featured on all pages
 - Contains link to contact form (opening in the same window), github page and social media (opening in a separate window)
-- User stories covered: 10
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-footer.JPG">
 </details>
 
-### Difficulty level screen
-- User can choose difficulty level of the game they wish to play
-- User stories covered: 3, 13
-
-<details><summary>See feature</summary>
-<img src="docs/features/feature-choose-difficulty-level-screen.JPG">
-</details>
-
 ### Game screen
 - The below elements are displayed on the screen:
   - Username
-  - Selected difficulty level of the game
-  - Number of guesses left in the round
   - Game instructions icon
-  - Category of the phrase to be guessed
-  - Image representing how many guesses were made
-  - Underscores for each letter of the hidden phrase
-  - Alphabet buttons which work on mouse click or keyboard press
-  - High score and current user score
-- User stories covered: 4, 5, 6
+  - Tetris Game
+  - Current score and level
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-game-screen.JPG">
 </details>
 
-### Correct Guess Screen
+### Game Over Screen
 - The below elements are displayed on the screen:
   - Username
-  - Difficulty level of the game that is being played
-  - Number of guesses that were left in the round - number of points scored
-  - Complimentary message to the user
-  - Number of points scored in the round
-  - Picture of smiley sun
-  - Button to start a new round
-  - High score and current user score
-- User stories covered: 7
-
-<details><summary>See feature</summary>
-<img src="docs/features/feature-game-correct-guess.JPG">
-</details>
-
-### Wrong Guess Screen
-- The below elements are displayed on the screen:
-  - Username
-  - Difficulty level of the game that was played
-  - Cloud icon with 0 guesses remaining
-  - Phrase which has not been guessed
-  - Picture of sad rainy cloud
-  - Buttons to restart the game on same level or change the level
-  - High score and current user score
-- User stories covered: 8
+  - Picture of game over with a tetris theme
+  - Button to restart the game
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-game-wrong-guess.JPG">
@@ -263,7 +211,6 @@ The website has 3 webpages consisting of 11 distinct features described below.
 ### Contact Form
 - User is able to provide feedback about the game
 - EmailJS has been used to send an email to developer with user's data and message
-- User stories covered: 10
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-contact-form.JPG">
@@ -272,7 +219,7 @@ The website has 3 webpages consisting of 11 distinct features described below.
 ### Contact Form confirmation screen
 - Thank you message is displayed
 - Contains return to the main screen button
-- User stories covered: 11
+- Picture of thank you with a tetris theme
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-contact-form-sent.JPG">
@@ -281,7 +228,7 @@ The website has 3 webpages consisting of 11 distinct features described below.
 ### 404 error page
 - The site has been given a 404 error page which is displayed if the user enters a url that does not exist.
 - Contains return to the main screen button
-- User stories covered: 15
+- Picture of 404 error message with a tetris-ish/pixelart thee
 
 <details><summary>See feature</summary>
 <img src="docs/features/feature-404-error-page.JPG">
@@ -291,7 +238,7 @@ The website has 3 webpages consisting of 11 distinct features described below.
 
 ### HTML Validation
 
-The W3C Markup Validation Service was used to validate the HTML of the website. All pages pass with no errors.
+The W3C Markup Validation Service was used to validate the HTML of the website. All pages pass with no errors, However, one warning was identified linked to.
 <details><summary>Home</summary>
 <img src="docs/validation/validation-html-game.JPG">
 </details>
@@ -431,189 +378,3 @@ The website was tested on the following devices:
 <img src="docs/user-story-testing/user-story-5-a.JPG">
 <img src="docs/user-story-testing/user-story-5-b.JPG">
 </details>
-
-
-6. I want to be able to see which letters I have already guessed and the number of guesses I have left in the round
-
-| **Feature** | **Action**                                                               | **Expected Result**                                                                                              | **Actual Result** |
-| ----------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ----------------- |
-| Game screen | Click on the displayed alphabet buttons or press the key on the keyboard | Used letters change color and cannot be used again. Number of remaining guesses is displayed in top right corner | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-6-a.JPG">
-<img src="docs/user-story-testing/user-story-6-b.JPG">
-</details>
-
-7. I want to see my result after I guessed the phrase
-
-| **Feature**          | **Action**                                                                            | **Expected Result**                                             | **Actual Result** |
-| -------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------- |
-| Correct Guess Screen | Guess the hidden phrase within specific number of guesses for the game level selected | The message and number of points scored in the round displayed. | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-7.JPG">
-</details>
-
-8. I want to see the phrase I didn’t manage to guess
-
-| **Feature**        | **Action**                                                  | **Expected Result**             | **Actual Result** |
-| ------------------ | ----------------------------------------------------------- | ------------------------------- | ----------------- |
-| Wrong Guess Screen | All guesses were used and the hidden phrase was not guessed | The correct phrase is displayed | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-8.JPG">
-</details>
-
-9. I want to be able to play the game on desktop, tablet and mobile devices
-
-| **Feature**                                   | **Action**                | **Expected Result**                      | **Actual Result** |
-| --------------------------------------------- | ------------------------- | ---------------------------------------- | ----------------- |
-| Every page has been designed to be responsive | Change device screen size | The site works on different screen sizes | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-9-a.JPG">
-<img src="docs/user-story-testing/user-story-9-b.JPG">
-<img src="docs/user-story-testing/user-story-9-c.JPG">
-<img src="docs/user-story-testing/user-story-9-d.JPG">
-</details>
-
-10. I want to be able to get in touch with the developer
-
-| **Feature**  | **Action**                               | **Expected Result**       | **Actual Result** |
-| ------------ | ---------------------------------------- | ------------------------- | ----------------- |
-| Contact Form | Click on the envelope icon in the footer | Displays the contact form | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-10-a.JPG">
-<img src="docs/user-story-testing/user-story-10-b.JPG">
-</details>
-
-11. I want to be sure that my message has been sent
-
-| **Feature**                      | **Action**                                           | **Expected Result**                        | **Actual Result** |
-| -------------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------- |
-| Contact Form confirmation screen | Fill in the contact form and click the submit button | The contact form confirmation is displayed | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-11-a.JPG">
-<img src="docs/user-story-testing/user-story-11-b.JPG">
-</details>
-
-12. I want user to easily understand the game
-
-| **Feature**       | **Action**                      | **Expected Result**                  | **Actual Result** |
-| ----------------- | ------------------------------- | ------------------------------------ | ----------------- |
-| Instructions Icon | Click on the icon on any screen | Modal with game instructions pops up | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-12-a.JPG">
-<img src="docs/user-story-testing/user-story-12-b.JPG">
-</details>
-
-13.  I want the user to be able to challenge themselves
-
-| **Feature**             | **Action**                                                                                                                  | **Expected Result**                             | **Actual Result** |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ----------------- |
-| Difficulty level screen | User selects on of the three available levels of the game which includes the hard version with only a few available guesses | The game level screen loads of the chosen game. | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-13.JPG">
-</details>
-
-14. I want my game to be fully responsive
-
-| **Feature**                                   | **Action**                | **Expected Result**                      | **Actual Result** |
-| --------------------------------------------- | ------------------------- | ---------------------------------------- | ----------------- |
-| Every page has been designed to be responsive | Change device screen size | The site works on different screen sizes | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-14-a.JPG">
-<img src="docs/user-story-testing/user-story-14-b.JPG">
-<img src="docs/user-story-testing/user-story-14-c.JPG">
-<img src="docs/user-story-testing/user-story-14-d.JPG">
-</details>
-
-15.  I want the user to come to a 404 error page instead of having to use the browser back button if they enter a url that does not exist
-
-| **Feature**    | **Action**           | **Expected Result**                                                                       | **Actual Result** |
-| -------------- | -------------------- | ----------------------------------------------------------------------------------------- | ----------------- |
-| 404 error page | Page cannot be found | When a user types the wrong address or cannot find a page they are rerouted to a 404 page | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-15.JPG">
-</details>
-
-16. I want user to be able to contact me and provide their feedback
-
-| **Feature**  | **Action**                                                  | **Expected Result**                                              | **Actual Result** |
-| ------------ | ----------------------------------------------------------- | ---------------------------------------------------------------- | ----------------- |
-| Contact Form | User fills in the contact form and clicks the submit button | Developer receives email with user's contact details and message | Works as expected |
-
-<details><summary>Screenshot</summary>
-<img src="docs/user-story-testing/user-story-16-a.JPG">
-<img src="docs/user-story-testing/user-story-16-b.JPG">
-</details>
-
-## Bugs
-
-| Bug                                                                                                                                         | Fix                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| All div with difficulty level buttons was responsive to click event and game level which appeared on the game screen was 'null'             | Added code for click event to only respond on elements with specific class (buttons)   |
-| W3C Markup Validation Service highlighted that heading was not closed                                                                       | Corrected the error by closing the h1 tag                                              |
-| Number of remaining guesses displayed on the cloud icon went below 0                                                                        | Amended code to display 0 when there were no guesses left                              |
-| Images for medium & hard level game were not showing on the game screen                                                                     | There was an error in image path in game-data.js file which I corrected                |
-| Game container was going off the screen for iPhone 5/ SE when tested with Chrome DevTools                                                   | Changed offset of game container for screens max-width: 390px                          |
-| When added footer to the game screen it was located at the top of the screen                                                                | Set footer with position fixed                                                         |
-| Whilst the contact form was validated, no data was sent to email                                                                            | Set up an email template and amended code with specific contact_service & contact_form |
-| Game container was going off the background leaving a white space below the background image on mobile and tablet screen in horizontal view | Changed background image position from absolute to fixed                               |
-| Contact form username input was pushed off the screen when user clicked on the element, making the input invisible to the user              | Add contact form container offset on username input focus                              |
-
-## Deployment
-
-### GitHub Pages
-The website was deployed using GitHub Pages by following these steps:
-1. In the GitHub repository navigate to the Settings tab
-2. On the left hand menu select Pages
-3. For the source select Branch: main
-4. Once saved, GitHub will refresh and your website will be publishd from GitHub repository
-5. The link to your published website will appear: "Your site is published at https://aleksandracodes.github.io/CI_PP2_SunshineGuessing/"
-
-### Forking the GitHub Repository
-1. Go to the GitHub repository
-2. Click on Fork button in top right corner
-
-### Making a Local Clone
-1. Go to the GitHub repository 
-2. Locate the Code button above the list of files and click it
-3. Highlight the "HTTPS" button to clone with HTTPS and copy the link
-4. Open Git Bash
-5. Change the current working directory to the one where you want the cloned directory
-6. Type git clone and paste the URL from the clipboard ($ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
-7. Press Enter to create your local clone
-
-## Credits
-
-### Images
-
-- Site icons in top line of game container and footer were taken from [Fontawesome](https://fontawesome.com/)
-- Sun & cloud clipart in the main game screen was taken from [clipartmax](https://www.clipartmax.com/middle/m2i8m2m2d3G6Z5d3_sun-clouds-cloud/) and amended with Microsoft Paint.
-- Sad cloud and smiley sun cliparts for the result screens were taken from [pinclipart](https://www.pinclipart.com/pindetail/iToJibw_cloud-with-rain-emoji-clipart-cartoon-cloud-gif/) & [clipartbest](http://www.clipartbest.com/clipart-xcg6L7Moi)
-- Background image: photo found on [unsplash](https://unsplash.com/photos/lR96g3H5VmA)
-- Image for contact form confirmation was used from [shutterstock](https://www.shutterstock.com/es/search/thank+you+sun)
-- 404 error page image was taken from [dreamstime](https://www.dreamstime.com/stock-illustration-vector-thunder-cloud-storm-tornado-mascot-lightning-bolts-cartoon-clip-art-illustration-tough-thundercloud-image77616772)
-
-### Code
-- [Instructions Modal](https://getbootstrap.com/docs/5.1/components/modal) was built using the Bootstrap v5.1.3 documentation
-- [EmailJS](https://www.emailjs.com/docs/tutorial/creating-contact-form) official tutorial & playground environment within EmailJS Email Templates were used to create a contact form with email being sent to desired address
-- Front page with login input element was inspired by [The Anagram Game](https://elainebroche-dev.github.io/ms2-anagram/) by Elainebroche
-- Game title with a gradient was created with [CSS Text Gradient Generator](https://www.cssportal.com/css-text-gradient-generator/)
-- Fade-in effect for game title was made using [this source](https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/)
-- [w3schools](https://www.w3schools.com/js/js_timing.asp) was checked to set a time delay for wrong guess screen
-- [Fontawesome documentation](https://fontawesome.com/v4.7/examples/) was reviewed to implement a cloud icon with number of remaining guesses over it
--  [w3schools](https://www.w3schools.com/css/tryit.asp?filename=trycss_form_focus2) was reviewed to change input focus color
--  Fixed contact form container going off mobile screen when clicking on input field with use of [this](https://brightwhiz.com/running-javascript-based-on-screen-size/) source
-
-## Acknowledgements
-Many thanks to everyone who supported me in the development of the website:
-- Most importantly, to my mentor Mo Shami for professional guidance and making me think outside of the box
-- Friends and family who played the game on their tablets and mobiles and provided feedback on responsiveness
