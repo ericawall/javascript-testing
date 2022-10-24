@@ -336,7 +336,7 @@ const colors = [
     'yellow',
     'orange',
     'blue',
-    'aqua',
+    'cyan',
     'green',
     'red',
 ];
